@@ -16,3 +16,8 @@ http://dev.pixl.com.ua/apk/w.apk
 
 # Video
 https://youtu.be/pVmALZCmnsw
+
+
+# Screenshots
+![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/1.png?raw=true)
+![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/2.png?raw=true)
