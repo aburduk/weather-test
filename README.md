@@ -12,3 +12,7 @@ http://dev.pixl.com.ua/apk/w.apk
 1/ OpenWeather Api: https://openweathermap.org/  
 2/ Google maps.  
 3/ Google geocoding. 
+
+
+# Video
+https://youtu.be/pVmALZCmnsw
