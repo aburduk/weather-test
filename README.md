@@ -6,7 +6,7 @@ APK:
 https://github.com/aburduk/weather-test/tree/main/android/app/build/outputs/apk/release
 
 Fallback url:  
-http://dev.pixl.com.ua/apk/w.apk
+http://dev.pixl.com.ua/apk/weather.apk
 
 # Using 
 1/ OpenWeather Api: https://openweathermap.org/  
