@@ -23,7 +23,7 @@ export default StyleSheet.create({
     backgroundColor: colors.black,
     width: 52,
     height: 52,
-    borderRadius: 52/2
+    borderRadius: 52/2,
   },
 
   buttonIcon: {

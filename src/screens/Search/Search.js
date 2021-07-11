@@ -4,30 +4,26 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  PermissionsAndroid
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Geocoder from 'react-native-geocoding';
+
 import {
-  GOOGLE_API_KEY,
-  OPEN_WEATHER_API_URL,
-  OPEN_WEATHER_API_KEY,
-} from 'constants/constants';
+  fetchDataFromApi,
+  fetchLocationApi
+} from 'services/apiCall';
 import { WeatherScroll } from 'components/WeatherScroll';
 
 import styles from './styles';
-
-Geocoder.init(GOOGLE_API_KEY);
-let location;
 
 export const Search = ({route, navigation}) => {
   // const location = route.params.coordinate || {};
   const [location, setLocation] = useState('');
   const {latitude, longitude} = location;
-  const [error, setErrorMessage] = useState('');
+  const [error, setErrorMessage] = useState();
   const [data, setData] = useState({});
   const [cityName, setCityName] = useState('');
+  const [chosenLocation, setChosenLocation] = useState('');
 
   useEffect(() => {
     if(route && route.params) {
@@ -37,37 +33,24 @@ export const Search = ({route, navigation}) => {
   }, [route]);
 
   useEffect(() => {
-      fetchDataFromApi(latitude, longitude);
+    fetchData(latitude, longitude);
   }, [location]);
 
-  const fetchDataFromApi = async(lat, lng) => {
-    if (lat && lng) {
-      try {
-        const response = await fetch(`${OPEN_WEATHER_API_URL}lat=${lat}&lon=${lng}&exclude=hourly,minutely&units=metric&appid=${OPEN_WEATHER_API_KEY}`,);
-        const result = await response.json();
-        if(result) {
-          // console.log('data', result);
-          setData(result);
-        }
-      } catch (error) {
-        // console.error('Error:', error);
-        setErrorMessage(error);
-      }
-    }
+  const fetchData = async () => {
+    setErrorMessage();
+    await fetchDataFromApi(latitude, longitude, setData, setErrorMessage );
+  };
+
+  const fetchCityName = async () => {
+    setErrorMessage();
+    await fetchLocationApi(cityName, setChosenLocation, setErrorMessage);
+    await fetchDataFromApi(chosenLocation.lat, chosenLocation.lng, setData, setErrorMessage );
   };
 
   const onPress = () => {
-    if(cityName) {
-      // Search by address
-      Geocoder.from(cityName)
-      .then(json => {
-        var location = json.results[0].geometry.location;
-        // console.log(location);
-        fetchDataFromApi(location.lat, location.lng);
-      })
-      .catch(error => console.warn(error));
-    }
-  };
+    setData({})
+    fetchCityName()
+  }
 
   return (
     <>
@@ -82,14 +65,17 @@ export const Search = ({route, navigation}) => {
             value={cityName} 
             onChangeText={setCityName} 
             onSubmitEditing={onPress}
+            returnKeyType="search"
           />
           <TouchableOpacity onPress={onPress} style={styles.button}>
             <Icon name="search" size={20} style={styles.buttonIcon} />
           </TouchableOpacity>
         </View>
 
-        {( !data && error && !location ) ? (
-          <Text style={styles.error}>{error}</Text>
+        { error ? (
+          <View style={styles.errorWrapper}>
+            <Text style={styles.error}>{error.message}</Text>
+          </View>
         ) : (
           <WeatherScroll weatherData={data.daily} />
         )}

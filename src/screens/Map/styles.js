@@ -73,5 +73,18 @@ export default StyleSheet.create({
   holdText: {
     color: colors.grey,
     fontSize: 11
+  },
+
+  errorWrapper: {
+    position: "absolute",
+    top: vh(20),
+    zIndex: 20,
+    padding: 20,
+    margin: 20,
+    width: vw(100) - 40,
+  },
+
+  error: {
+    color: colors.red
   }
 });

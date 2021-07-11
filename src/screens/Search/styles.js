@@ -26,17 +26,32 @@ export default StyleSheet.create({
     paddingRight: 20,
     paddingTop: 5,
     paddingBottom: 5,
-    width: vw(100) - 80,
+    width: vw(100) - 100,
     borderColor: colors.lightGrey,
     borderWidth: 1,
   },
 
   button: {
-    width: 20,
-    marginLeft: 20,
+    display: 'flex',
+    justifyContent: "center",
+    alignItems: "center",
+    width: 40,
+    height: 40,
+    borderRadius: 40/2
   },
 
   buttonIcon: {
     color: colors.white,
   },
+
+  errorWrapper: {
+    ...shadow.box,
+    padding: 20,
+    margin: 20,
+    width: vw(100) - 40,
+  },
+
+  error: {
+    color: colors.red
+  }
 });

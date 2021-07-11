@@ -1,20 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { Text, View } from 'react-native';
-import Geocoder from 'react-native-geocoding';
 import MapView, {Marker} from 'react-native-maps';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import {
-  GOOGLE_API_KEY,
-  OPEN_WEATHER_API_URL,
-  OPEN_WEATHER_API_KEY
-} from 'constants/constants';
 
+import {
+  fetchDataFromApi,
+  fetchCityNameFromApi
+} from 'services/apiCall';
 import {CurrentDay} from 'components/CurrentDay';
 
 import styles from './styles';
 
-Geocoder.init(GOOGLE_API_KEY);
 const latitudeDelta = 1;
 const longitudeDelta = 1;
 
@@ -23,6 +20,7 @@ export const Map = ({navigation}) => {
   const [markerLocation, setMarkerLocation] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
   const [cityName, setCityName] = useState();
+  const [error, setErrorMessage] = useState();
   const [region, setRegion] = useState({
     latitude: 50.3862676,
     longitude: 30.7414751,
@@ -32,8 +30,8 @@ export const Map = ({navigation}) => {
 
   useEffect(() => {
     if(markerLocation) {
-      fetchDataFromApi(markerLocation.latitude, markerLocation.longitude);
-      fetchCityName(markerLocation.latitude, markerLocation.longitude);
+      fetchData();
+      fetchCityName();
       setRegion({
         ...region,
         latitude: markerLocation.latitude,
@@ -52,30 +50,13 @@ export const Map = ({navigation}) => {
     mapRef.current.animateToRegion(region, 1000);
   }
 
-  const fetchDataFromApi = async(lat, lng) => {
-    if (lat && lng) {
-      try {
-        const response = await fetch(`${OPEN_WEATHER_API_URL}lat=${lat}&lon=${lng}&exclude=hourly,minutely&units=metric&appid=${OPEN_WEATHER_API_KEY}`,);
-        const result = await response.json();
-        if(result) {
-          setWeatherData(result);
-        }
-      } catch (error) {
-        // console.error('Error:', error);
-        setErrorMessage(error);
-      }
-    }
+  const fetchData = async () => {
+    await fetchDataFromApi(markerLocation.latitude, markerLocation.longitude, setWeatherData, setErrorMessage );
   };
 
-  const fetchCityName = (lat, lng) => {
-    Geocoder.from(lat, lng)
-		.then(json => {
-      var addressComponent = json.results[0].formatted_address;
-			setCityName(addressComponent)
-		})
-		.catch(error => console.warn(error));
-  }
-
+  const fetchCityName = async () => {
+    await fetchCityNameFromApi(markerLocation.latitude, markerLocation.longitude, setCityName, setErrorMessage)
+  };
 
   const showMarker = eventObj => {
     setMarkerLocation(eventObj.nativeEvent.coordinate);
@@ -90,7 +71,6 @@ export const Map = ({navigation}) => {
 
   const hideMarker = () => {
     setMarkerLocation(null);
-    // setRegion(null)
   }
 
   const renderMarker = () => {
