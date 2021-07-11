@@ -17,7 +17,6 @@ export const Search = ({route, navigation}) => {
   const [cityName, setCityName] = useState('');
   const [chosenLocation, setChosenLocation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  console.log(isLoading);
   useEffect(() => {
     if (route && route.params) {
       setLocation(route.params.coordinate);

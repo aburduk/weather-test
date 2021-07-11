@@ -15,7 +15,7 @@ const WeatherScroll = ({weatherData, isLoading}) => {
       contentContainerStyle={{paddingBottom: 225}}
       showsVerticalScrollIndicator={false}
       alwaysBounceVertical>
-       {isLoading && (<ActivityIndicator size="large" color={colors.white} style={styles.activityIndicator} />)}
+      {isLoading && (<ActivityIndicator size="large" color={colors.white} style={styles.activityIndicator} />)}
       <CurrentDay
         data={weatherData && weatherData.length > 0 ? weatherData[0] : {}}
       />
