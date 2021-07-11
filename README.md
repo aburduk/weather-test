@@ -19,5 +19,8 @@ https://youtu.be/pVmALZCmnsw
 
 
 # Screenshots
-![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/1.png?raw=true)
-![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/2.png?raw=true)
+![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/screenshots/1.png?raw=true)
+![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/screenshots/2.png?raw=true)
+![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/screenshots/3.png?raw=true)
+![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/screenshots/4.png?raw=true)
+![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/screenshots/5.png?raw=true)
