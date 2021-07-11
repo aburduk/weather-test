@@ -8,6 +8,7 @@ import {fetchDataFromApi, fetchCityNameFromApi} from 'services/apiCall';
 import {CurrentDay} from 'components/CurrentDay';
 
 import styles from './styles';
+import mapStyle from './mapStyle.json';
 
 const latitudeDelta = 1;
 const longitudeDelta = 1;
@@ -128,7 +129,7 @@ export const Map = ({navigation}) => {
         initialRegion={region}
         tracksViewChanges={false}
         provider={PROVIDER_GOOGLE}
-        >
+        customMapStyle={mapStyle}>
         {renderMarker()}
       </MapView>
     </View>

@@ -41,7 +41,7 @@ export default StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     width: vw(70),
-    borderColor: colors.orange,
+    borderColor: colors.green,
     borderWidth: 1,
   },
 
