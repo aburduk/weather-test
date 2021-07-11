@@ -45,4 +45,8 @@ export default StyleSheet.create({
     margin: 20,
     ...shadow.box,
   },
+  
+  activityIndicator: {
+    marginTop: vh(15)
+  }
 });

@@ -16,7 +16,8 @@ export const Search = ({route, navigation}) => {
   const [data, setData] = useState({});
   const [cityName, setCityName] = useState('');
   const [chosenLocation, setChosenLocation] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(isLoading);
   useEffect(() => {
     if (route && route.params) {
       setLocation(route.params.coordinate);
@@ -30,7 +31,7 @@ export const Search = ({route, navigation}) => {
 
   const fetchData = async () => {
     setErrorMessage();
-    await fetchDataFromApi(latitude, longitude, setData, setErrorMessage);
+    await fetchDataFromApi(latitude, longitude, setData, setErrorMessage, setIsLoading);
   };
 
   const fetchCityName = async () => {
@@ -41,6 +42,7 @@ export const Search = ({route, navigation}) => {
       chosenLocation.lng,
       setData,
       setErrorMessage,
+      setIsLoading
     );
   };
 
@@ -73,7 +75,7 @@ export const Search = ({route, navigation}) => {
             <Text style={styles.error}>{error.message}</Text>
           </View>
         ) : (
-          <WeatherScroll weatherData={data.daily} />
+          <WeatherScroll weatherData={data.daily} isLoading={isLoading} />
         )}
       </LinearGradient>
     </>

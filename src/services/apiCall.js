@@ -8,14 +8,16 @@ import {
 
 Geocoder.init(GOOGLE_API_KEY);
 
-const fetchDataFromApi = async (lat, lng, setWeatherData, setErrorMessage) => {
+const fetchDataFromApi = async (lat, lng, setWeatherData, setErrorMessage, setIsLoading) => {
   try {
     if (lat && lng) {
+      setIsLoading(true);
       const response = await fetch(
         `${OPEN_WEATHER_API_URL}lat=${lat}&lon=${lng}&exclude=hourly,minutely&units=metric&appid=${OPEN_WEATHER_API_KEY}`,
       );
       const result = await response.json();
       if (result) {
+        setIsLoading(false);
         setWeatherData(result);
       }
     }

@@ -1,12 +1,13 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, ActivityIndicator} from 'react-native';
 
 import {CurrentDay} from 'components/CurrentDay';
 import {Forecast} from 'components/Forecast';
 
 import styles from './styles';
+import {colors} from 'resources/styles/common';
 
-const WeatherScroll = ({weatherData}) => {
+const WeatherScroll = ({weatherData, isLoading}) => {
   return (
     <ScrollView
       style={styles.scrollView}
@@ -14,10 +15,10 @@ const WeatherScroll = ({weatherData}) => {
       contentContainerStyle={{paddingBottom: 225}}
       showsVerticalScrollIndicator={false}
       alwaysBounceVertical>
+       {isLoading && (<ActivityIndicator size="large" color={colors.white} style={styles.activityIndicator} />)}
       <CurrentDay
         data={weatherData && weatherData.length > 0 ? weatherData[0] : {}}
       />
-
       <Forecast data={weatherData} />
     </ScrollView>
   );
