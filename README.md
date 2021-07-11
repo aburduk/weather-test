@@ -24,3 +24,4 @@ https://youtu.be/pVmALZCmnsw
 ![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/screenshots/3.png?raw=true)
 ![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/screenshots/4.png?raw=true)
 ![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/screenshots/5.png?raw=true)
+![alt text](https://github.com/aburduk/weather-test/blob/main/src/resources/images/screenshots/6.png?raw=true)
