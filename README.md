@@ -15,7 +15,7 @@ http://dev.pixl.com.ua/apk/weather.apk
 
 
 # Video
-https://youtu.be/pVmALZCmnsw
+https://youtu.be/_XxgwBjm6II
 
 
 # Screenshots
