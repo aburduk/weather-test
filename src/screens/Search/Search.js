@@ -1,18 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import {
-  fetchDataFromApi,
-  fetchLocationApi
-} from 'services/apiCall';
-import { WeatherScroll } from 'components/WeatherScroll';
+import {fetchDataFromApi, fetchLocationApi} from 'services/apiCall';
+import {WeatherScroll} from 'components/WeatherScroll';
 
 import styles from './styles';
 
@@ -26,7 +18,7 @@ export const Search = ({route, navigation}) => {
   const [chosenLocation, setChosenLocation] = useState('');
 
   useEffect(() => {
-    if(route && route.params) {
+    if (route && route.params) {
       setLocation(route.params.coordinate);
       setCityName(route.params.cityName);
     }
@@ -38,32 +30,36 @@ export const Search = ({route, navigation}) => {
 
   const fetchData = async () => {
     setErrorMessage();
-    await fetchDataFromApi(latitude, longitude, setData, setErrorMessage );
+    await fetchDataFromApi(latitude, longitude, setData, setErrorMessage);
   };
 
   const fetchCityName = async () => {
     setErrorMessage();
     await fetchLocationApi(cityName, setChosenLocation, setErrorMessage);
-    await fetchDataFromApi(chosenLocation.lat, chosenLocation.lng, setData, setErrorMessage );
+    await fetchDataFromApi(
+      chosenLocation.lat,
+      chosenLocation.lng,
+      setData,
+      setErrorMessage,
+    );
   };
 
   const onPress = () => {
-    setData({})
-    fetchCityName()
-  }
+    setData({});
+    fetchCityName();
+  };
 
   return (
     <>
       <LinearGradient
         colors={['#4298cb', '#58b2b5', '#6cc9a3']}
-        style={styles.container}
-      >
+        style={styles.container}>
         <View style={styles.header}>
-          <TextInput 
-            style={styles.input} 
-            placeholder={'Enter city name'} 
-            value={cityName} 
-            onChangeText={setCityName} 
+          <TextInput
+            style={styles.input}
+            placeholder={'Enter city name'}
+            value={cityName}
+            onChangeText={setCityName}
             onSubmitEditing={onPress}
             returnKeyType="search"
           />
@@ -72,7 +68,7 @@ export const Search = ({route, navigation}) => {
           </TouchableOpacity>
         </View>
 
-        { error ? (
+        {error ? (
           <View style={styles.errorWrapper}>
             <Text style={styles.error}>{error.message}</Text>
           </View>

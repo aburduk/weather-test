@@ -14,19 +14,21 @@ export const AppNavigator = () => {
     <NavigationContainer
       theme={{
         colors: {
-          background: "transparent",
-          card:  "transparent",
+          background: 'transparent',
+          card: 'transparent',
         },
-      }}
-    >
+      }}>
       <Tab.Navigator
-        tabBar={(props) => <Footer {...props} />}
+        tabBar={props => <Footer {...props} />}
         screenOptions={({}) => ({
-          cardStyle: { backgroundColor: "transparent" },
-        })}
-      >
-        <Tab.Screen name="Map" component={Map} options={{ headerShown: false }} />
-        <Tab.Screen name="Search" component={Search} options={{ headerShown: false }} />
+          cardStyle: {backgroundColor: 'transparent'},
+        })}>
+        <Tab.Screen name="Map" component={Map} options={{headerShown: false}} />
+        <Tab.Screen
+          name="Search"
+          component={Search}
+          options={{headerShown: false}}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

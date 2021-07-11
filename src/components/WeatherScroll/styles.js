@@ -4,9 +4,9 @@ import {shadow, colors} from 'resources/styles/common';
 
 export default StyleSheet.create({
   scrollView: {
-    flex:1,
+    flex: 1,
     position: 'absolute',
-    height: "100%",
+    height: '100%',
     width: vw(100),
     paddingTop: vh(13),
     zIndex: 1,
@@ -44,5 +44,5 @@ export default StyleSheet.create({
     padding: 20,
     margin: 20,
     ...shadow.box,
-  }
+  },
 });

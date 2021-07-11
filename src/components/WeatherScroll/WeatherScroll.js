@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import {ScrollView} from 'react-native';
 
 import {CurrentDay} from 'components/CurrentDay';
 import {Forecast} from 'components/Forecast';
@@ -8,20 +8,17 @@ import styles from './styles';
 
 const WeatherScroll = ({weatherData}) => {
   return (
-    <ScrollView 
+    <ScrollView
       style={styles.scrollView}
-      contentInset={{ bottom: 175 }}
-      contentContainerStyle={{ paddingBottom: 225 }}
+      contentInset={{bottom: 175}}
+      contentContainerStyle={{paddingBottom: 225}}
       showsVerticalScrollIndicator={false}
-      alwaysBounceVertical
-    >
-      
+      alwaysBounceVertical>
       <CurrentDay
         data={weatherData && weatherData.length > 0 ? weatherData[0] : {}}
       />
 
-      <Forecast data={weatherData}/>
-
+      <Forecast data={weatherData} />
     </ScrollView>
   );
 };

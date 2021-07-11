@@ -33,11 +33,11 @@ export default StyleSheet.create({
 
   button: {
     display: 'flex',
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 40,
     height: 40,
-    borderRadius: 40/2
+    borderRadius: 40 / 2,
   },
 
   buttonIcon: {
@@ -52,6 +52,6 @@ export default StyleSheet.create({
   },
 
   error: {
-    color: colors.red
-  }
+    color: colors.red,
+  },
 });

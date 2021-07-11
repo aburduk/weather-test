@@ -9,7 +9,7 @@ export default StyleSheet.create({
 
   map: {
     width: vw(100),
-    height: "100%",
+    height: '100%',
     zIndex: 1,
   },
 
@@ -46,37 +46,37 @@ export default StyleSheet.create({
   },
 
   hold: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
     right: 20,
     top: vh(50) - 21,
-    zIndex: 3
+    zIndex: 3,
   },
 
   holdIconWrapper: {
-    backgroundColor: colors.blue, 
+    backgroundColor: colors.blue,
     width: 42,
     height: 42,
-    textAlign: "center",
-    borderRadius: 42/2,
+    textAlign: 'center',
+    borderRadius: 42 / 2,
     padding: 10,
-    marginBottom: 7
+    marginBottom: 7,
   },
 
   holdIcon: {
     color: colors.white,
-    fontSize: 20
+    fontSize: 20,
   },
 
   holdText: {
     color: colors.grey,
-    fontSize: 11
+    fontSize: 11,
   },
 
   errorWrapper: {
-    position: "absolute",
+    position: 'absolute',
     top: vh(20),
     zIndex: 20,
     padding: 20,
@@ -85,6 +85,6 @@ export default StyleSheet.create({
   },
 
   error: {
-    color: colors.red
-  }
+    color: colors.red,
+  },
 });

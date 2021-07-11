@@ -1,13 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { Text, View } from 'react-native';
+import {Text, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import {
-  fetchDataFromApi,
-  fetchCityNameFromApi
-} from 'services/apiCall';
+import {fetchDataFromApi, fetchCityNameFromApi} from 'services/apiCall';
 import {CurrentDay} from 'components/CurrentDay';
 
 import styles from './styles';
@@ -29,7 +26,7 @@ export const Map = ({navigation}) => {
   });
 
   useEffect(() => {
-    if(markerLocation) {
+    if (markerLocation) {
       fetchData();
       fetchCityName();
       setRegion({
@@ -38,24 +35,34 @@ export const Map = ({navigation}) => {
         longitude: markerLocation.longitude,
         latitudeDelta,
         longitudeDelta,
-      })
+      });
     }
   }, [markerLocation]);
 
   useEffect(() => {
-    animateToRegion()
+    animateToRegion();
   }, [region]);
 
   const animateToRegion = () => {
     mapRef.current.animateToRegion(region, 1000);
-  }
+  };
 
   const fetchData = async () => {
-    await fetchDataFromApi(markerLocation.latitude, markerLocation.longitude, setWeatherData, setErrorMessage );
+    await fetchDataFromApi(
+      markerLocation.latitude,
+      markerLocation.longitude,
+      setWeatherData,
+      setErrorMessage,
+    );
   };
 
   const fetchCityName = async () => {
-    await fetchCityNameFromApi(markerLocation.latitude, markerLocation.longitude, setCityName, setErrorMessage)
+    await fetchCityNameFromApi(
+      markerLocation.latitude,
+      markerLocation.longitude,
+      setCityName,
+      setErrorMessage,
+    );
   };
 
   const showMarker = eventObj => {
@@ -65,33 +72,36 @@ export const Map = ({navigation}) => {
   const showWeather = obj => {
     navigation.navigate('Search', {
       coordinate: obj.nativeEvent.coordinate,
-      cityName: cityName
+      cityName: cityName,
     });
   };
 
   const hideMarker = () => {
     setMarkerLocation(null);
-  }
+  };
 
   const renderMarker = () => {
- 
-    return markerLocation &&  weatherData && (
-      
-      <View style={styles.markerWrapper}>
-        <Marker coordinate={markerLocation} onPress={showWeather}>
-          <LinearGradient
-            colors={['#f1f1f1', '#ffffff', '#f1f1f1']}
-            style={styles.marker}
-          >
-            <CurrentDay
-              data={weatherData.daily && weatherData.daily.length > 0 ? weatherData.daily[0] : {}}
-              onMap={true}
-              cityName={cityName}
-            />
-          </LinearGradient>
-        </Marker>
-      </View>
-      
+    return (
+      markerLocation &&
+      weatherData && (
+        <View style={styles.markerWrapper}>
+          <Marker coordinate={markerLocation} onPress={showWeather}>
+            <LinearGradient
+              colors={['#f1f1f1', '#ffffff', '#f1f1f1']}
+              style={styles.marker}>
+              <CurrentDay
+                data={
+                  weatherData.daily && weatherData.daily.length > 0
+                    ? weatherData.daily[0]
+                    : {}
+                }
+                onMap={true}
+                cityName={cityName}
+              />
+            </LinearGradient>
+          </Marker>
+        </View>
+      )
     );
   };
 
@@ -107,20 +117,16 @@ export const Map = ({navigation}) => {
         <View style={styles.holdIconWrapper}>
           <Icon name="hand-point-up" style={styles.holdIcon} />
         </View>
-        
-        <Text style={styles.holdText}>
-          Please tape hold
-        </Text>
+
+        <Text style={styles.holdText}>Please tape hold</Text>
       </View>
-      
 
       <MapView
         ref={mapRef}
         style={styles.map}
         onLongPress={showMarker}
         onPress={hideMarker}
-        initialRegion={region}
-      >
+        initialRegion={region}>
         {renderMarker()}
       </MapView>
     </View>
