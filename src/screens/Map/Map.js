@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Text, View} from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -18,6 +18,8 @@ export const Map = ({navigation}) => {
   const [weatherData, setWeatherData] = useState(null);
   const [cityName, setCityName] = useState();
   const [error, setErrorMessage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  
   const [region, setRegion] = useState({
     latitude: 50.3862676,
     longitude: 30.7414751,
@@ -27,7 +29,7 @@ export const Map = ({navigation}) => {
 
   useEffect(() => {
     if (markerLocation) {
-      fetchData();
+      fetchData(markerLocation.latitude, markerLocation.longitude);
       fetchCityName();
       setRegion({
         ...region,
@@ -47,12 +49,13 @@ export const Map = ({navigation}) => {
     mapRef.current.animateToRegion(region, 1000);
   };
 
-  const fetchData = async () => {
+  const fetchData = async (lat, lng) => {
     await fetchDataFromApi(
-      markerLocation.latitude,
-      markerLocation.longitude,
+      lat,
+      lng,
       setWeatherData,
       setErrorMessage,
+      setIsLoading
     );
   };
 
@@ -90,11 +93,7 @@ export const Map = ({navigation}) => {
               colors={['#f1f1f1', '#ffffff', '#f1f1f1']}
               style={styles.marker}>
               <CurrentDay
-                data={
-                  weatherData.daily && weatherData.daily.length > 0
-                    ? weatherData.daily[0]
-                    : {}
-                }
+                data={weatherData.daily[0]}
                 onMap={true}
                 cityName={cityName}
               />
@@ -126,7 +125,10 @@ export const Map = ({navigation}) => {
         style={styles.map}
         onLongPress={showMarker}
         onPress={hideMarker}
-        initialRegion={region}>
+        initialRegion={region}
+        tracksViewChanges={false}
+        provider={PROVIDER_GOOGLE}
+        >
         {renderMarker()}
       </MapView>
     </View>
