@@ -1,7 +1,9 @@
-import {StyleSheet, Appearance, Dimensions} from 'react-native';
+import {StyleSheet, Appearance, Dimensions, Platform} from 'react-native';
 import {vw, vh} from 'utils/viewports';
 
 export const darkMode = Appearance.getColorScheme() === 'dark';
+
+export const isAndroid = Platform.OS === 'android';
 
 export const colors = {
   black: '#0C0C0C',

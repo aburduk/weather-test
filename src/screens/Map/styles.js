@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from 'utils/viewports';
-import {shadow, colors} from 'resources/styles/common';
+import {shadow, colors, isAndroid} from 'resources/styles/common';
 
 export default StyleSheet.create({
   container: {
@@ -20,7 +20,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     zIndex: 2,
     width: vw(100),
-    top: vh(10),
+    top: isAndroid ? vh(10) : vh(4),
   },
 
   locationWrapper: {
@@ -51,7 +51,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     right: 20,
-    top: vh(50) - 21,
+    top: isAndroid? vh(50) - 21 : vh(50) - 42,
     zIndex: 3,
   },
 

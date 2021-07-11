@@ -20,7 +20,7 @@ export default class App extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container} forceInset={{ bottom: 'never', top: 'never', vertical: 'never' }}>
-        <StatusBar barStyle="default" />
+        <StatusBar barStyle="light-content" />
         <AppNavigator />
       </SafeAreaView>
     );
@@ -29,7 +29,8 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: "100%"
+    flex:1,
+    height: "100%",
+    backgroundColor: "black"
   },
 });

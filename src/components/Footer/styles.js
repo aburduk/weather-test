@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {vh, vw} from 'utils/viewports';
-import {shadow, colors} from 'resources/styles/common';
+import {shadow, colors, isAndroid} from 'resources/styles/common';
 
 export default StyleSheet.create({
   footer: {
@@ -9,7 +9,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     position: 'absolute',
-    bottom: vh(7),
+    bottom: isAndroid ? vh(7) : vh(2),
     width: vw(100),
     height: 64,
     zIndex: 5,
